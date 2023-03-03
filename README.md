@@ -1,6 +1,13 @@
-# todo
+# Todo Client
 
 A new Flutter project.
+
+<p align="center">
+
+[![Client](https://github.com/Mastersam07/TodoClient/actions/workflows/ci.yaml/badge.svg)](https://github.com/Mastersam07/TodoClient/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/Mastersam07/TodoClient/branch/master/graph/badge.svg?token=6tS8SESfB5)](https://codecov.io/gh/Mastersam07/TodoClient)
+
+</p>
 
 ## Getting Started
 
