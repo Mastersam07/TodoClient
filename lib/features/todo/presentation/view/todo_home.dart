@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/features/todo/presentation/vms/todo_vm.dart';
 import 'package:todo/features/todo/presentation/widgets/todo_card.dart';
 import 'package:todo/shared/constants.dart';
 
@@ -9,6 +11,7 @@ class TodoHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<TodoViewModel>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -18,18 +21,20 @@ class TodoHome extends StatelessWidget {
         onPressed: () {},
         child: const Icon(Icons.add),
       ),
-      body: Padding(
+      body: ListView.separated(
         padding:
             const EdgeInsets.symmetric(horizontal: Constants.horizontalPadding),
-        child: Column(
-          children: [
-            TodoCard(
-              title: 'My First Todo',
-              description:
-                  'I set so much stuff on this todo and I hope it works',
-            ),
-          ],
-        ),
+        itemBuilder: (_, index) {
+          final todo = vm.todos.elementAt(index);
+          return TodoCard(
+            title: todo.title ?? '',
+            description: todo.content ?? '',
+            isCompleted: todo.status?.status == Status.completed,
+            onTap: () => vm.toggleTodo(todo),
+          );
+        },
+        separatorBuilder: (_, __) => const SizedBox(height: 4),
+        itemCount: vm.todos.length,
       ),
     );
   }

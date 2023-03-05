@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../application/auth_vm.dart';
+import '../vms/auth_vm.dart';
 import '../../../../shared/constants.dart';
 import '../../../../shared/widgets/text_field.dart';
 
@@ -9,6 +9,7 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.read<AuthenticationViewModel>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -17,7 +18,7 @@ class SignUpPage extends StatelessWidget {
           label: 'Email',
           hint: 'email@provider.co',
           onChanged: (value) {
-            context.read<AuthenticationViewModel>().emailOnChanged(value ?? '');
+            vm.emailOnChanged(value ?? '');
           },
         ),
         const SizedBox(height: Constants.gridSpaceSmall),
@@ -25,12 +26,12 @@ class SignUpPage extends StatelessWidget {
           label: 'Password',
           hint: '**********',
           suffix: InkWell(
-            onTap: context.read<AuthenticationViewModel>().obscurePasswordOnTap,
+            onTap: vm.obscurePasswordOnTap,
             child: AnimatedSwitcher(
               duration: const Duration(
                   milliseconds: Constants.shortAnimationDuration),
               child: () {
-                if (context.watch<AuthenticationViewModel>().obscurePassword) {
+                if (vm.obscurePassword) {
                   return const Icon(
                     Icons.remove_red_eye,
                     key: Key('obscure'),
@@ -44,9 +45,7 @@ class SignUpPage extends StatelessWidget {
             ),
           ),
           onChanged: (value) {
-            context
-                .read<AuthenticationViewModel>()
-                .passwordOnChanged(value ?? '');
+            vm.passwordOnChanged(value ?? '');
           },
         ),
         const SizedBox(height: Constants.gridSpaceMedium),
@@ -54,7 +53,7 @@ class SignUpPage extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              context.read<AuthenticationViewModel>().signUpOnTap(context);
+              vm.signUpOnTap(context);
             },
             child: const Text('Sign Up'),
           ),
