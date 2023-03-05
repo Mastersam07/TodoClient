@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/features/authentication/presentation/views/auth.dart';
 import 'package:todo/features/splash/presentation/views/splash.dart';
+import 'package:todo/features/todo/presentation/view/create_todo.dart';
 import 'package:todo/features/todo/presentation/view/todo_home.dart';
 
 import 'features/authentication/presentation/vms/auth_vm.dart';
@@ -35,6 +36,11 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => const AuthScreen());
             case TodoHome.route:
               return MaterialPageRoute(builder: (_) => const TodoHome());
+            case CreateTodo.route:
+              final args = settings.arguments as Map<String, dynamic>?;
+              return MaterialPageRoute(
+                builder: (_) => CreateTodo(id: args?['id'] as int?),
+              );
             default:
               return MaterialPageRoute(
                 builder: (context) => Scaffold(

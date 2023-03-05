@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo/features/todo/presentation/view/create_todo.dart';
 import 'package:todo/features/todo/presentation/vms/todo_vm.dart';
 import 'package:todo/features/todo/presentation/widgets/todo_card.dart';
 import 'package:todo/shared/constants.dart';
@@ -18,7 +19,7 @@ class TodoHome extends StatelessWidget {
         title: const Text('Your Todos'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.of(context).pushNamed(CreateTodo.route),
         child: const Icon(Icons.add),
       ),
       body: ListView.separated(
@@ -30,7 +31,9 @@ class TodoHome extends StatelessWidget {
             title: todo.title ?? '',
             description: todo.content ?? '',
             isCompleted: todo.status?.status == Status.completed,
-            onTap: () => vm.toggleTodo(todo),
+            toggleStatus: () => vm.toggleTodo(todo),
+            onTap: () => Navigator.of(context)
+                .pushNamed(CreateTodo.route, arguments: {'id': todo.id}),
           );
         },
         separatorBuilder: (_, __) => const SizedBox(height: 4),

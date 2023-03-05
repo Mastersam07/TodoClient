@@ -8,11 +8,13 @@ class TodoCard extends StatelessWidget {
     required this.description,
     this.isCompleted = false,
     this.onTap,
+    this.toggleStatus,
   }) : super(key: key);
   final String title;
   final String description;
   final bool isCompleted;
   final VoidCallback? onTap;
+  final VoidCallback? toggleStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,9 @@ class TodoCard extends StatelessWidget {
           ),
           trailing: Checkbox(
             value: isCompleted,
-            onChanged: (value) {},
+            onChanged: (value) {
+              toggleStatus?.call();
+            },
           ),
         ),
       ),

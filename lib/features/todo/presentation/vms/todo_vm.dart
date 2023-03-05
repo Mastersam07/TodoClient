@@ -24,6 +24,7 @@ class TodoViewModel extends ChangeNotifier {
   }
 
   List<Todo> _todos = [];
+
   List<Todo> get todos => _todos;
 
   void fetchTodos() async {
@@ -63,5 +64,13 @@ class TodoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void createTodo() {}
+  void updateTodo(Todo item) {
+    _todos[item.id!] = item;
+    notifyListeners();
+  }
+
+  void createTodo(Todo todo) {
+    todos.add(todo);
+    notifyListeners();
+  }
 }

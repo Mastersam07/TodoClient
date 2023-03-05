@@ -9,6 +9,7 @@ class AppTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.label,
     this.hint,
+    this.maxLines,
     this.suffix,
     this.prefix,
   }) : super(key: key);
@@ -17,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
   final VoidCallback? onEditingComplete;
   final String? label;
   final String? hint;
+  final int? maxLines;
   final Widget? suffix;
   final Widget? prefix;
 
@@ -26,14 +28,17 @@ class AppTextFormField extends StatelessWidget {
       controller: controller,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete,
+      maxLines: maxLines,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
         prefixIcon: prefix,
         suffixIcon: suffix,
         border: const OutlineInputBorder(),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: Constants.gridSpaceSmall),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: Constants.gridSpaceSmall,
+          vertical: Constants.gridSpaceSmall,
+        ),
       ),
     );
   }
