@@ -63,7 +63,5 @@ class TodoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void createTodo() {
-    // TODO: NAVIGATE TO NEW VIEW
-  }
+  void createTodo() {}
 }
